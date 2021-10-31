@@ -29,7 +29,6 @@ class GreeterServer(system: ActorSystem) {
     val service: HttpRequest => Future[HttpResponse] =
       GreeterServiceHandler(new GreeterServiceImpl())
 
-    // Bind service handler servers to localhost:8080/8081
     val binding = Http().newServerAt("127.0.0.1", 6000).bind(service)
 
     // report successful binding
