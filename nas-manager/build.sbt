@@ -7,3 +7,5 @@ lazy val root = (project in file(".")).
     name := "nas-manager",
     libraryDependencies += "org.specs2" %% "specs2-core" % "4.13.0"
   )
+
+enablePlugins(AkkaGrpcPlugin)
