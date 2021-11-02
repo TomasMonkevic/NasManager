@@ -1,3 +1,5 @@
+package com.tomasmo
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.{ HttpRequest, HttpResponse }
 import akka.http.scaladsl.Http
@@ -29,7 +31,7 @@ class GreeterServer(system: ActorSystem) {
     val service: HttpRequest => Future[HttpResponse] =
       GreeterServiceHandler(new GreeterServiceImpl())
 
-    val binding = Http().newServerAt("127.0.0.1", 6000).bind(service)
+    val binding = Http().newServerAt("0.0.0.0", 6000).bind(service)
 
     // report successful binding
     binding.foreach { binding => println(s"gRPC server bound to: ${binding.localAddress}") }

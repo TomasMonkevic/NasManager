@@ -1,3 +1,5 @@
+package com.tomasmo
+
 import scala.concurrent.Future
 import akka.NotUsed
 import akka.stream.Materializer

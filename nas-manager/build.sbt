@@ -1,8 +1,9 @@
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
-      organization := "ch.epfl.scala",
-      scalaVersion := "2.13.3"
+      organization := "com.tomasmo",
+      scalaVersion := "2.13.3",
+      version := "0.0.1"
     )),
     name := "nas-manager",
     libraryDependencies ++= Seq(
@@ -11,3 +12,10 @@ lazy val root = (project in file(".")).
   )
 
 enablePlugins(AkkaGrpcPlugin)
+
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
+enablePlugins(AshScriptPlugin)
+
+Compile / mainClass := Some("com.tomasmo.GreeterServer")
+dockerBaseImage       := "openjdk:jre-alpine"
