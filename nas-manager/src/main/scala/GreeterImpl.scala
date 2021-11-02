@@ -23,7 +23,16 @@ class GreeterServiceImpl(implicit mat: Materializer) extends GreeterService {
 
   override def itKeepsReplying(in: HelloRequest): Source[HelloReply, NotUsed] = {
     println(s"sayHello to ${in.name} with stream of chars...")
-    Source(s"Hello, ${in.name}".toList).map(character => HelloReply(character.toString))
+    var i = 0
+    Source.fromIterator(() => new Iterator[HelloReply] {
+      override def hasNext: Boolean = true
+
+      override def next(): HelloReply = {
+        //Thread.sleep(1000)
+        i = i + 1
+        HelloReply(s"${in.name} ${i}")
+      }
+    })
   }
 
   override def streamHellos(in: Source[HelloRequest, NotUsed]): Source[HelloReply, NotUsed] = {
